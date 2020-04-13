@@ -1,4 +1,8 @@
-<?php include ("layouts/header.php"); ?>
+<?php
+include ("layouts/header.php"); 
+$boarders_list = getBoarderList();
+?>
+
   <div class="body-wrapper">
     <!-- partial:partials/_sidebar.html -->    
     <?php include ("layouts/sidebarmenu.php"); ?>
@@ -19,6 +23,7 @@
                   <a class="mdc-button mdc-button--raised filled-button--success" href="boarders__add.php">ADD</a>
                 </div>
               </div>
+              
               <div class="table-responsive">
                 <table class="table table-hoverable">
                   <thead>
@@ -26,41 +31,22 @@
                       <th class="text-left">Full Name</th>
                       <th>Contact Number</th>
                       <th>Email Address</th>
-                      <th>Date Started</th>
+                      <th>Date Of Birth</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
+                  <?php foreach ($boarders_list as $row) { ?>
                     <tr>
-                      <td class="text-left">Mario Speedwagon</td>
-                      <td>202-555-0167</td>
-                      <td>extrefbefore@pintaresfacilconsapolin.com</td>
-                      <td>October 3, 2019</td>
+                      <td class="text-left"><?php echo $row['name__c']; ?></td>
+                      <td><?php echo $row['contact__c']; ?></td>
+                      <td><?php echo $row['email__c']; ?></td>
+                      <td><?php echo $row['dob__c']; ?></td>
                       <td>
-                      <a href="boarders__edit.php" class="mdc-button mdc-button--raised filled-button--info">View</a>
-                      <a href="boarders__account.php" class="mdc-button mdc-button--raised filled-button--secondary">Account</a>
+                      <a href="boarders__edit.php?b_id=<?php echo $row['id__c']; ?>" class="mdc-button mdc-button--raised filled-button--info">View</a>
                       </td>
                     </tr>
-                    <tr>
-                      <td class="text-left">Petey Cruiser</td>
-                      <td>202-555-0164</td>
-                      <td>jeslam.elsh@urfadegerkaybi.com</td>
-                      <td>November 2, 2019</td>
-                      <td>
-                        <a href="boarders__edit.php" class="mdc-button mdc-button--raised filled-button--info">View</a>                        
-                        <a href="boarders__account.php" class="mdc-button mdc-button--raised filled-button--secondary">Account</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="text-left">Anna Sthesia</td>
-                      <td>202-555-0144</td>
-                      <td>kincaid.kyion@aallaa.org</td>
-                      <td>December 10, 2019</td>
-                      <td>
-                        <a href="boarders__edit.php" class="mdc-button mdc-button--raised filled-button--info">View</a>
-                        <a href="boarders__account.php" class="mdc-button mdc-button--raised filled-button--secondary">Account</a>
-                      </td>
-                    </tr>
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>

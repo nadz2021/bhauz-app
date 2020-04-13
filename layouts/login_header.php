@@ -1,9 +1,6 @@
 <?php
-session_start();
-include ("config/functions.php"); 
-isLogin();
+$base_url = '//127.0.0.1/edsa-bhauz-app/';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

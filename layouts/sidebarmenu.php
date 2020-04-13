@@ -20,12 +20,18 @@
         <div class="mdc-list-item mdc-drawer-item">
             <a class="mdc-drawer-link" href="boarders.php">
             <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">people</i>
-            Boarders / Accounts
+            Boarders
+            </a>
+        </div>
+        <div class="mdc-list-item mdc-drawer-item">
+            <a class="mdc-drawer-link" href="assign.php">
+            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">folder_shared</i>
+            Assign Boarder/Room
             </a>
         </div>
         <div class="mdc-list-item mdc-drawer-item">
             <a class="mdc-drawer-link" href="rooms.php">
-            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">room_service</i>
+            <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">location_city</i>
             Rooms
             </a>
         </div>

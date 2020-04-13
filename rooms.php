@@ -1,4 +1,8 @@
-<?php include ("layouts/header.php"); ?>
+<?php
+include ("layouts/header.php"); 
+$room = new Rooms();
+$room_list = $room->getRooms();
+?>
   <div class="body-wrapper">
     <!-- partial:partials/_sidebar.html -->    
     <?php include ("layouts/sidebarmenu.php"); ?>
@@ -30,30 +34,16 @@
                     </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                      <td class="text-left">101</td>
-                      <td>Bed Spacer</td>
-                      <td>1500</td>
-                      <td>
-                        <a href="rooms__edit.php" class="mdc-button mdc-button--raised filled-button--info">View</a>                        
-                      </td>
-                    </tr>
+                  <?php foreach ($room_list as $row) { ?>
                     <tr>
-                      <td class="text-left">102</td>
-                      <td>Bed Spacer</td>
-                      <td>1500</td>
+                      <td class="text-left"><?php echo $row['room_number__c']; ?></td>
+                      <td><?php echo $row['room_type__c']; ?></td>
+                      <td><?php echo $row['price__c']; ?></td>
                       <td>
-                        <a href="rooms__edit.php" class="mdc-button mdc-button--raised filled-button--info">View</a>                        
+                        <a href="rooms__edit.php?id=<?php echo $row['id__c']; ?>" class="mdc-button mdc-button--raised filled-button--info">View</a>                        
                       </td>
-                    </tr>
-                    <tr>
-                      <td class="text-left">201</td>
-                      <td>Full Room</td>
-                      <td>3500</td>
-                      <td>
-                        <a href="rooms__edit.php" class="mdc-button mdc-button--raised filled-button--info">View</a>                        
-                      </td>
-                    </tr>
+                    </tr>        
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>

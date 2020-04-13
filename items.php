@@ -1,4 +1,8 @@
-<?php include ("layouts/header.php"); ?>
+<?php
+include ("layouts/header.php"); 
+$item = new Items();
+$item_list = $item->getItems();
+?>
   <div class="body-wrapper">
     <!-- partial:partials/_sidebar.html -->    
     <?php include ("layouts/sidebarmenu.php"); ?>
@@ -29,16 +33,19 @@
                     </tr>
                   </thead>
                   <tbody>
+                  <?php
+                    if(count($item_list)!=null) {
+                      foreach ($item_list as $row) { ?>
                     <tr>
-                      <td class="text-left">Cellphone</td>
-                      <td>300</td>
-                      <td><a href="items__edit.php" class="mdc-button mdc-button--raised filled-button--info">View</a></td>
-                    </tr>
-                    <tr>
-                      <td class="text-left">Laptop</td>
-                      <td>600</td>
-                      <td><a href="items__edit.php" class="mdc-button mdc-button--raised filled-button--info">View</a></td>
+                      <td class="text-left"><?php echo $row['item__c']; ?></td>
+                      <td><?php echo $row['price__c']; ?></td>
+                      <td><a href="items__edit.php?id=<?php echo $row['id__c']; ?>" class="mdc-button mdc-button--raised filled-button--info">View</a></td>
                     </tr>                   
+                  <?php } 
+                  }
+                   else { ?>
+                      <td colspan="3"><h3 class="text-center">No items found...</h3></td>
+                  <?php } ?>                  
                   </tbody>
                 </table>
               </div>
