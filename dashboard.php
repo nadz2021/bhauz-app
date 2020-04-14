@@ -1,4 +1,23 @@
-<?php include ("layouts/header.php"); ?>
+<?php
+include ("layouts/header.php");
+$boarders = new Boarders();
+$payments = new Payments();
+$bills    = new Bills();
+$boarder_count = count($boarders->getBoarders());
+$payment_list = $payments->getPayments();
+$total_payment = 0;
+foreach ($payment_list as $row) {
+  $total_payment+=$row['amount__c'];
+}
+
+$bill_list = $bills->getBills();
+$total_bills = 0;
+foreach ($bill_list as $row) {
+  $total_bills+=$row['current_bill__c'];
+}
+
+?>
+
   <div class="body-wrapper">
     <!-- partial:partials/_sidebar.html -->    
       <?php include ("layouts/sidebarmenu.php"); ?>
@@ -15,7 +34,7 @@
                 <div class="mdc-card info-card info-card--success">
                   <div class="card-inner">
                     <h5 class="card-title">Boarders</h5>
-                    <h5 class="font-weight-light pb-2 mb-1 border-bottom">17</h5>
+                    <h5 class="font-weight-light pb-2 mb-1 border-bottom"><?php echo $boarder_count; ?> </h5>
                     <p class="tx-12 text-muted">48% target reached</p>
                     <div class="card-icon-wrapper">
                       <i class="material-icons">dvr</i>
@@ -26,8 +45,8 @@
               <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet">
                 <div class="mdc-card info-card info-card--danger">
                   <div class="card-inner">
-                    <h5 class="card-title">Annual Profit</h5>
-                    <h5 class="font-weight-light pb-2 mb-1 border-bottom">$350</h5>
+                    <h5 class="card-title">Total Payment</h5>
+                    <h5 class="font-weight-light pb-2 mb-1 border-bottom"><?php echo $total_payment; ?></h5>
                     <p class="tx-12 text-muted">55% target reached</p>
                     <div class="card-icon-wrapper">
                       <i class="material-icons">attach_money</i>
@@ -39,7 +58,7 @@
                 <div class="mdc-card info-card info-card--primary">
                   <div class="card-inner">
                     <h5 class="card-title">Pending Payment</h5>
-                    <h5 class="font-weight-light pb-2 mb-1 border-bottom">$600</h5>
+                    <h5 class="font-weight-light pb-2 mb-1 border-bottom"><?php echo round(($total_bills - $total_payment), 2); ?></h5>
                     <p class="tx-12 text-muted">87% target reached</p>
                     <div class="card-icon-wrapper">
                       <i class="material-icons">trending_up</i>

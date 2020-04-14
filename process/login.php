@@ -22,8 +22,10 @@ if (isset($_REQUEST['login'])) {
         $user_login = $user->loginUser($clean_user, $encrypt_password);
         
         if($user_login!=0) {
-		    $_SESSION['isLogin'] = 1;
-            $_SESSION['username']= $clean_user;
+		    $_SESSION['isLogin']    = 1;
+            $_SESSION['username']   = $clean_user;
+            $_SESSION['nick_name']  = $login[0]['nick_name__c'];
+            $_SESSION['full_name']  = $login[0]['full_name__c'];
             header("location:dashboard.php");
             exit();
         }

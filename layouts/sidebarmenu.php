@@ -6,7 +6,7 @@
         </div>
         <div class="mdc-drawer__content">
     <div class="user-info">
-        <p class="name">Pjay Nadela</p>
+        <p class="name"><?php echo $_SESSION['full_name']; ?></p>
         <p class="email">pjaynadela@gmail.com</p>
     </div>
     <div class="mdc-list-group">
