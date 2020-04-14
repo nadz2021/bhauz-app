@@ -1,9 +1,10 @@
 <?php
 include ("layouts/header.php");
-$account = new Accounts();
-$item = new Items();
-$excess = new Excess();
-
+$account  = new Accounts();
+$bill     = new Bills();
+$excess   = new Excess();
+$item     = new Items();
+$payment  = new Payments();
 
 if(isset($_POST['submit'])){  
   $id             = $_POST['account_id'];
@@ -40,6 +41,8 @@ else {
   $actual_excess_amount  = ($actual_excess_amount=='' ? 0 : $actual_excess_amount);
   $item_list_account     = $item->getItemsByAccountID($id);
 
+  $bill_list             = $bill->getBillListByAccountID($id);
+  $payment_list          = $payment->getPaymentListByAccountID($id);
   
   
 
@@ -201,6 +204,85 @@ else {
                   }
                    else { ?>
                       <td colspan="3"><h3 class="text-center">No items found...</h3></td>
+                  <?php } ?>                  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="mdc-layout-grid">              
+            <div class="mdc-card p-0">
+              <div class="d-flex justify-content-between my-3 px-1">                
+                <div class="p-2 bd-highlight">
+                  <h6 class="card-title">List of Bills</h6>
+                </div>                
+              </div>
+              <div class="table-responsive">
+                <table class="table table-hoverable">
+                  <thead>
+                    <tr>
+                      <th class="text-left">Previous Bill</th>
+                      <th>Current Bill</th>
+                      <th>Total Amount</th>
+                      <th>Bill Started</th>
+                      <th>Bill Ended</th>
+                      <th>Bill Generated</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                    if(count($bill_list)!=null) {
+                      foreach ($bill_list as $row) { ?>
+                    <tr>
+                      <td class="text-left"><?php echo $row['previous_bill__c']; ?></td>
+                      <td><?php echo $row['current_bill__c']; ?></td>
+                      <td><?php echo $row['total_amount__c']; ?></td>
+                      <td><?php echo $row['bill_started__c']; ?></td>
+                      <td><?php echo $row['bill_ended__c']; ?></td>
+                      <td><?php echo $row['date_created__c']; ?></td>
+                      <td><a href="account_bill__info.php?bill_id=<?php echo $row['id__c']; ?>" class="mdc-button mdc-button--raised filled-button--info">View Bill Info</a></td>                      
+                    </tr>                   
+                  <?php } 
+                  }
+                   else { ?>
+                      <td colspan="3"><h3 class="text-center">No bills found...</h3></td>
+                  <?php } ?>                  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="mdc-layout-grid">              
+            <div class="mdc-card p-0">
+              <div class="d-flex justify-content-between my-3 px-1">                
+                <div class="p-2 bd-highlight">
+                  <h6 class="card-title">List of Payments</h6>                  
+                </div>                
+                <div class="p-2">
+                  <a class="mdc-button mdc-button--raised filled-button--success" href="accounts__info.php?acc_id=<?php echo $account_id; ?>">ADD PAYMENT</a>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-hoverable">
+                  <thead>
+                    <tr>
+                      <th class="text-left">Amount</th>
+                      <th>Date Paid</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                    if(count($payment_list)!=null) {
+                      foreach ($payment_list as $row) { ?>
+                    <tr>
+                      <td class="text-left"><?php echo $row['amount__c']; ?></td>
+                      <td><?php echo $row['date_paid__c']; ?></td>
+                    </tr>                   
+                  <?php } 
+                  }
+                   else { ?>
+                      <td colspan="3"><h3 class="text-center">No payments found...</h3></td>
                   <?php } ?>                  
                   </tbody>
                 </table>

@@ -14,6 +14,7 @@ if(isset($_POST['submit'])){
   $total_amount   = $room_price + $excess_amount;
   $status         = 'C';
   $account->insertSetupAccount($room_price, $excess_amount, $total_amount, $deposit, $status, $date_started, $id);
+  calculateFirstBill($total_amount,$date_started,$id);
   header("Location: accounts__info.php?acc_id=".$id);  	
 }
 else if(isset($_POST['delete'])){

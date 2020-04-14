@@ -17,7 +17,7 @@ $item_list = $item->getItems();
             <div class="mdc-card p-0">
               <div class="d-flex justify-content-between my-3 px-1">                
                 <div class="p-2 bd-highlight">
-                  <h6 class="card-title">Charge List</h6>
+                  <h6 class="card-title">Addon Item List</h6>
                 </div>
                 <div class="p-2">
                   <a class="mdc-button mdc-button--raised filled-button--success" href="items__add.php">ADD ITEM</a>

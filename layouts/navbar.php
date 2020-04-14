@@ -1,9 +1,3 @@
-<?php
-  if (isset($_GET['q'])){
-    session_destroy();
-    header("location:index.php");
-  }
-?>
 <header class="mdc-top-app-bar">
         <div class="mdc-top-app-bar__row">
           <div class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
@@ -27,7 +21,7 @@
                       <i class="mdi mdi-settings-outline text-primary"></i>                      
                     </div>
                     <div class="item-content d-flex align-items-start flex-column justify-content-center">
-                      <h6 class="item-subject font-weight-normal"><a href="?q=logout">Logout</a></h6>
+                      <h6 class="item-subject font-weight-normal"><a href="logout.php">Logout</a></h6>
                     </div>
                   </li>
                 </ul>

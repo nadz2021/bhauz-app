@@ -1,6 +1,7 @@
 <?php 
 include ("class/DBController.php");
 include ("class/Accounts.php");
+include ("class/Bills.php");
 include ("class/Boarders.php");
 include ("class/Excess.php");
 include ("class/Items.php");
@@ -20,18 +21,21 @@ function getBoarderList() {
 	return $results;
 }
 
-
-/*********************************************
-	[+]For Session Token[+]
-**********************************************/
-function generateRandomString($length = 10)  {
-	return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
-}
+function calculateFirstBill($total_amount,$date_started,$id) {
+	$bills 		= new Bills();
+	$first_day 	= intval(date('d', strtotime($date_started)));
 	
-function getToken() {
-	$token = generateRandomString();
-	$_SESSION['token'] = $token;
-	return $token;
+	$lastDateOfThisMonth =strtotime('last day of this month') ;
+	$lastDay = date('Y-m-d', $lastDateOfThisMonth);
+	
+	if($first_day>1) { // check if day start at day 1
+		$last_day 		= intVal(date('d', $lastDateOfThisMonth));
+		$rate_per_day 	= $total_amount / $last_day;
+		$number_of_days	= $last_day - $first_day;
+		$total_amount 	= $rate_per_day * $number_of_days;
+	}
+
+	$bills->createBill($id,0,$total_amount,$total_amount,$total_amount,$date_started,$lastDay,'N');
 }
 
 function processedLead($vlead){

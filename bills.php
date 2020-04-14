@@ -1,4 +1,9 @@
-<?php include ("layouts/header.php"); ?>
+<?php
+include ("layouts/header.php"); 
+$bills = new Bills();
+$bill_list = $bills->getBills();
+?>
+
   <div class="body-wrapper">
     <!-- partial:partials/_sidebar.html -->    
     <?php include ("layouts/sidebarmenu.php"); ?>
@@ -15,58 +20,55 @@
                 <div class="p-2 bd-highlight">
                   <h6 class="card-title">Bill List</h6>
                 </div>
+                <div class="p-2">
+                  <a class="mdc-button mdc-button--raised filled-button--success" href="bills_generate.php">GENERATE BILLS</a>
+                </div>
               </div>
               <div class="table-responsive">
                 <table class="table table-hoverable">
                   <thead>
                     <tr>
-                      <th class="text-left">Account Number</th>
-                      <th>Full Name</th>
+                      <th class="text-left">Full Name</th>
+                      <th>Room Number</th>
+                      <th>Room Price</th>
                       <th>Previous Bill</th>
                       <th>Current Bill</th>
-                      <th>Total Amount</th>
-                      <th>Date</th>
-                      <th>Status</th>                      
+                      <th>Bill Amount</th>
+                      <th>Balance</th>
+                      <th>Status</th>
+                      <th>Date Generated</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
+                  <?php
+                    if(count($bill_list)!=null) {
+                      foreach ($bill_list as $row) { ?>
                     <tr>
-                      <td class="text-left">1</td>
-                      <td>Mario Speedwagon</td>
-                      <td>700</td>
-                      <td>1500</td>
-                      <td>2200</td>
-                      <td>03-01-2019</td>
-                      <td><button class="mdc-button text-button--success">Paid</button></td>
+                      <td class="text-left"><?php echo $row['name__c']; ?></td>
+                      <td><?php echo $row['room_number__c']; ?></td>
+                      <td><?php echo $row['price__c']; ?></td>
+                      <td><?php echo $row['previous_bill__c']; ?></td>
+                      <td><?php echo $row['current_bill__c']; ?></td>
+                      <td><?php echo $row['total_amount__c']; ?></td>
+                      <td><?php echo $row['balance__c']; ?></td>
                       <td>
-                        <a href="bills__view.php" class="mdc-button mdc-button--raised filled-button--info">View Bill</a>
+                        <?php if($row['status__c']=='P') { ?>
+                          <button class="mdc-button text-button--success mdc-ripple-upgraded">Paid</button>
+                        <?php } else if($row['status__c']=='T') { ?>
+                          <button class="mdc-button text-button--warning mdc-ripple-upgraded">Unsettled Bill</button>
+                        <?php } else  { ?>
+                          <button class="mdc-button text-button--danger mdc-ripple-upgraded">Unpaid</button>
+                        <?php }?>
                       </td>
-                    </tr>
-                    <tr>
-                      <td class="text-left">1</td>
-                      <td>Petey Cruiser</td>
-                      <td>0</td>
-                      <td>2500</td>
-                      <td>2500</td>
-                      <td>03-05-2019</td>
-                      <td><button class="mdc-button text-button--danger">Pending / Not Paid</button></td>
-                      <td>
-                        <a href="bills__view.php" class="mdc-button mdc-button--raised filled-button--info">View Bill</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="text-left">1</td>
-                      <td>Anna Sthesia</td>
-                      <td>700</td>
-                      <td>1500</td>
-                      <td>2200</td>
-                      <td>03-16-2019</td>
-                      <td><button class="mdc-button text-button--danger">Pending / Not Paid</button></td>
-                      <td>
-                        <a href="bills__view.php" class="mdc-button mdc-button--raised filled-button--info">View Bill</a>
-                      </td>
-                    </tr>
+                      <td><?php echo $row['date_created__c']; ?></td>                      
+                      <td><a href="bills__edit.php?bill_id=<?php echo $row['id__c']; ?>" class="mdc-button mdc-button--raised filled-button--info">View Bill</a></td>
+                    </tr>                   
+                  <?php } 
+                  }
+                   else { ?>
+                      <td colspan="9"><h3 class="text-center">No bills found...</h3></td>
+                  <?php } ?>            
                   </tbody>
                 </table>
               </div>

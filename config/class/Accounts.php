@@ -8,7 +8,8 @@ class Accounts {
   }    
 
   function getAccounts() {
-    $sql = "SELECT * FROM accounts__c";
+    $sql = "SELECT accounts__c.id__c as account_id__c, name__c, room_number__c, rooms__c.price__c as room_price__c, accounts__c.room_price__c as price__c, excess_amount__c, total_amount__c, deposit__c, accounts__c.date_start__c as date_start__c FROM accounts__c INNER JOIN boarders__c ON accounts__c.boarder_id__c= boarders__c.id__c INNER JOIN rooms__c ON accounts__c.room_id__c = rooms__c.id__c WHERE accounts__c.status__c='C'
+    ORDER BY boarders__c.name__c ASC";
     $result = $this->db_handle->runBaseQuery($sql);
     return $result;
   }

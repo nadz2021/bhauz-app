@@ -1,4 +1,9 @@
-<?php include ("layouts/header.php"); ?>
+<?php
+include ("layouts/header.php"); 
+$payment = new Payments();
+$payment_list = $payment->getPayments();
+?>
+
   <div class="body-wrapper">
     <!-- partial:partials/_sidebar.html -->    
     <?php include ("layouts/sidebarmenu.php"); ?>
@@ -23,41 +28,25 @@
                 <table class="table table-hoverable">
                   <thead>
                     <tr>
-                      <th class="text-left">Account Number</th>
-                      <th>Full Name</th>
+                      <th class="text-left">Full Name</th>
                       <th>Amount</th>
                       <th>Date</th>
-                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                      <td class="text-left">1</td>
-                      <td>Mario Speedwagon</td>
-                      <td>1500</td>
-                      <td>03-01-2020</td>
-                      <td>
-                        <a href="payments__update.php" class="mdc-button mdc-button--raised filled-button--info">View</a>                        
-                      </td>
-                    </tr>
+                  <?php
+                    if(count($payment_list)!=null) {
+                      foreach ($payment_list as $row) { ?>
                     <tr>
-                      <td class="text-left">2</td>
-                      <td>Petey Cruiser</td>
-                      <td>700</td>
-                      <td>03-03-2020</td>
-                      <td>
-                        <a href="payments__update.php" class="mdc-button mdc-button--raised filled-button--info">View</a>                        
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="text-left">3</td>
-                      <td>Anna Sthesia</td>
-                      <td>3500</td>
-                      <td>03-26-2020</td>
-                      <td>
-                        <a href="payments__update.php" class="mdc-button mdc-button--raised filled-button--info">View</a>                        
-                      </td>
-                    </tr>
+                      <td class="text-left"><?php echo $row['name__c']; ?></td>
+                      <td><?php echo $row['amount__c']; ?></td>
+                      <td><?php echo $row['date_paid__c']; ?></td>
+                    </tr>                   
+                  <?php } 
+                  }
+                   else { ?>
+                      <td colspan="3"><h3 class="text-center">No payments found...</h3></td>
+                  <?php } ?>            
                   </tbody>
                 </table>
               </div>
