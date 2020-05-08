@@ -2,7 +2,7 @@
         <div class="mdc-top-app-bar__row">
           <div class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
             <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button sidebar-toggler">menu</button>
-            <span class="mdc-top-app-bar__title">Greetings Pjay!</span>            
+            <span class="mdc-top-app-bar__title">Greetings <?php echo $_SESSION['nick_name']; ?>!</span>            
           </div>
           <div class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end mdc-top-app-bar__section-right">
             <div class="menu-button-container menu-profile d-none d-md-block">
@@ -11,7 +11,7 @@
                   <span class="figure">
                     <img src="lib/images/faces/pjay.jpg" alt="user" class="user">
                   </span>
-                  <span class="user-name">Pjay Nadela</span>
+                  <span class="user-name"><?php echo $_SESSION['full_name']; ?></span>
                 </span>                
               </button>
               <div class="mdc-menu mdc-menu-surface" tabindex="-1">

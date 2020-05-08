@@ -26,6 +26,7 @@ if (isset($_REQUEST['login'])) {
             $_SESSION['username']   = $clean_user;
             $_SESSION['nick_name']  = $login[0]['nick_name__c'];
             $_SESSION['full_name']  = $login[0]['full_name__c'];
+            $_SESSION['email_add']  = $login[0]['email__c'];
             header("location:dashboard.php");
             exit();
         }

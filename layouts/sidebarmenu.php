@@ -7,12 +7,12 @@
         <div class="mdc-drawer__content">
     <div class="user-info">
         <p class="name"><?php echo $_SESSION['full_name']; ?></p>
-        <p class="email">pjaynadela@gmail.com</p>
+        <p class="email"><?php echo $_SESSION['email_add']; ?></p>
     </div>
     <div class="mdc-list-group">
         <nav class="mdc-list mdc-drawer-menu">
         <div class="mdc-list-item mdc-drawer-item">
-            <a class="mdc-drawer-link" href="index.php">
+            <a class="mdc-drawer-link" href="dashboard.php">
             <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">home</i>
             Dashboard
             </a>
